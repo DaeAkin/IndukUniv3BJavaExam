@@ -1,0 +1,67 @@
+<!Doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<th:block th:include="/fragments/header"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/nav"></th:block> 
+	<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner text-center">
+                        <div class="breadcrumb_iner_item">
+							<h2>정보수정</h2>
+                            <p>Home <span>//</span>Info</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- End banner Area -->
+	
+	<div class="whole-wrap">
+		<div class="container box_1170">
+			<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 mt-sm-30">
+					</div>
+					<div class="col-lg-8 col-md-8">
+						<h3 class="mb-30">회원정보</h3>
+						<!-- 
+						<form th:action="@{'/users'}" th:method="post">
+						 -->
+						 <form th:action="@{'/users/{id}'(id=${user.id})}" th:method="put" th:object="${user}">
+							<div class="mt-10">
+								<input type="text" th:field="*{userId}" name="userId" placeholder="사용자 아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 아이디'" required="" class="single-input" ReadOnly>
+							</div>
+							<div class="mt-10">
+								<input type="password" th:field="*{userPw}" name="userPw" placeholder="사용자 암호" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 암호'" required="" class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" th:field="*{name}" name="name" placeholder="사용자 이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 이름'" required="" class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" th:field="*{company}" name="company" placeholder="사용자 회사" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 회사'" required="" class="single-input">
+							</div>
+							<div class="form-group mt-3">
+				              <button type="submit" class="button button-contactForm btn_4">
+				              	회원정보수정</button>
+				            </div>
+						</form>
+					</div>
+					<div class="col-lg-2 col-md-2 mt-sm-30">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<th:block th:include="fragments/footer"></th:block> 
+</body>
+
+</html>

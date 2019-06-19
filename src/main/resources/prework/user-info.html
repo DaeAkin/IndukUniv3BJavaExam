@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>사용자</title>
+	<th:block th:include="fragments/header"></th:block>
+	<script language="javascript">
+	$(document).ready(function () {
+	    $("#delete-form").submit(function (event) {
+	        event.preventDefault();
+	        fire_ajax_submit();
+	    });
+	});
+
+	function fire_ajax_submit() {
+	    var data = $("#delete-form").serializeArray();    
+	    console.log(json);
+	    url = 
+	    $.ajax({
+	        type: "",
+	        contentType: "application/json",
+	        url: "/users/",
+	        data: json,
+	        dataType: 'text', // json -> text
+	        success: function (data) {
+	        	console.log("SUCCESS : ", data);
+	        	 $("#delete-form").submit();
+	        },
+	        error: function (e) {
+	            console.log("ERROR : ", e);
+	        }
+	    });
+
+	}
+	</script>
+</head>
+<body>
+
+<th:block th:include="fragments/nav"></th:block>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>User Info</h1>
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">ID</th>
+		      <th scope="col">NAME</th>
+		      <th scope="col">COMPANY</th>
+		      <th scope="col">Update</th>
+		      <th scope="col">Delete</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <form th:action="@{'/users/{id}'(id=${id})}" th:method="put" >
+    		  <div th:object="${user}">
+		      <th><span scope="row" th:text="${id}"></span><input type="hidden" name="id" th:field="*{id}"/></th>
+		      <td><input type="text" name="name" th:field="*{name}"/></td>
+		      <td><input type="text" name="company" th:field="*{company}"/></td>
+		      <td>		      
+		      <button type="submit" id="updateButton">update </button>
+		      </div>
+		      </form>
+		      </td>
+		      <td>
+		      <form th:action="@{'/users/{id}'(id=${id})}" th:method="delete" >
+				  <input type="hidden" name="id" th:value="${id}" />
+				  <button type="submit" id="deleteButton">delete </button>
+			  </form>
+		      </td>
+		      
+		    </tr>	
+		  </tbody>
+		</table>    
+		
+
+    </div>
+
+</div>
+
+<th:block th:include="fragments/footer"></th:block>
+
+</body>
+</html>

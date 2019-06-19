@@ -1,0 +1,23 @@
+spring:
+  profiles: local
+
+  datasource:
+    platform: h2
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  # 출력되는 로그에 색상 출력    
+  output:
+    ansi:
+      enabled: always    
+      
+# 생성되는 로그 파일명
+logging:
+  file: application.log      

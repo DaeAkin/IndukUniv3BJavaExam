@@ -1,0 +1,21 @@
+<!Doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+	<form class="form-contact comment_form"
+		th:action="@{/questions/{questionId}/answers/{answerId} (questionId=${question.id},answerId=${answer.id})}"
+		th:method="put" id="commentForm">
+		
+		 <textarea class="form-control w-100" name="contents" id="contents" cols="30" rows="5"
+                                 placeholder="Write Comment"></textarea>
+		<input type="submit" value="수정하기" />
+	</form>
+
+</body>
+</html>
