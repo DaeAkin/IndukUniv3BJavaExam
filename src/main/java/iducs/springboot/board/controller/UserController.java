@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import iducs.springboot.board.domain.User;
 import iducs.springboot.board.service.UserService;
+import iducs.springboot.board.utils.HttpSessionUtils;
+import iducs.springboot.board.utils.PageRequest;
 
 @Controller
 @RequestMapping("/users")
@@ -23,17 +25,24 @@ public class UserController {
 	@Autowired UserService userService; 
 	// 의존성 주입(Dependency Injection)
 	// @Component, @Controller, @Repository, @Service 표시된 클래스형 빈 객체를 스프링이 스캔하여 등록하고, @Autowired 등 요청시 주입 	
+	@Autowired HttpSessionUtils httpSessionUtils;
 	
 	@PostMapping("")
 	public String createUser(@Valid User formUser, Model model) {
 		userService.saveUser(formUser); 
 		model.addAttribute("user", formUser);
-		return "redirect:/users";
+		//회원가입 축하 메세지
+		return "/users/cong";
 	}	
 	@GetMapping("")
 	public String getUsers(Model model, HttpSession session, Long pageNo) { //@PathVariable(value = "pageNo") Long pageNo) {
+		if(!httpSessionUtils.isLoginUser(session)) {
+			return "redirect:/";
+		}
 		System.out.println(pageNo);
 		model.addAttribute("users", userService.getUsers(pageNo,model));
+		
+		
 		return "/users/list";
 	}	
 	@GetMapping("/{id}")

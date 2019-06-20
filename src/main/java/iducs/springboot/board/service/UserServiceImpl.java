@@ -15,12 +15,14 @@ import iducs.springboot.board.domain.User;
 import iducs.springboot.board.entity.UserEntity;
 import iducs.springboot.board.exception.ResourceNotFoundException;
 import iducs.springboot.board.repository.UserRepository;
+import iducs.springboot.board.utils.HttpSessionUtils;
 
 @Service//("userService")
 public class UserServiceImpl implements UserService {
 
 	@Autowired UserRepository repository;
 
+	
 	@Override
 	public User getUserById(long id) {
 		UserEntity userEntity = null;
@@ -69,10 +71,11 @@ public class UserServiceImpl implements UserService {
 		
 		return users;
 	}	
-	
+	// 내가수정한 getusers()
 	public List<User> getUsers(Long pageNo , Model model) {
 		
 		PageRequest pageRequest = PageRequest.of((int) (pageNo - 1), 3, new Sort(Sort.Direction.DESC, "id"));
+				
 		Page<UserEntity> entities = repository.findAll(pageRequest);
 		List<User> users = new ArrayList<User>();
 		for(UserEntity entity : entities) {
@@ -81,10 +84,7 @@ public class UserServiceImpl implements UserService {
 		}	
 		
 		model.addAttribute("pageRequest",pageRequest);
-		
-		
-		
-		
+	
 	return getUsers(pageNo);
 	}
 	

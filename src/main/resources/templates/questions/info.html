@@ -36,6 +36,10 @@
                      	<li><a href="#"><i class="far fa-user"></i> <span th:text="${question.writer.userId}"></span></a></li>
                         <li><a href="#"><i class="far fa-clock"></i> <span th:text="${#temporals.format(question.createTime, 'yyyy년 MM월 dd일 HH:mm')}"></span></a></li>
                         <li><a href="#comment-area"><i class="far fa-comments"></i> 03 Comments</a></li>
+                     <!--   <div th:if="${session.user.userId == answer.writer.userId }"> -->
+                        <li><a href="#">수정하기</a></li>
+                        <li><a href="#">삭제하기</a></li>
+                        </div>
                      </ul>
                      <div class="quote-wrapper">
                         <div class="quotes" th:text="${question.contents}">
@@ -159,7 +163,7 @@
                   </div>                  
                </div>
                <div class="comment-form">
-                  <h4>Leave a Reply</h4>
+                  <h4>댓글달기</h4>
                   <form class="form-contact comment_form" th:action="@{'/questions/{id}/answers'(id=${question.id})}" method="post" id="commentForm">
                      <div class="row">
                         <div class="col-12">

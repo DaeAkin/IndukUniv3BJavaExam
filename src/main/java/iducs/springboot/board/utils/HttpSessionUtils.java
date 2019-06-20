@@ -2,8 +2,11 @@ package iducs.springboot.board.utils;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Component;
+
 import iducs.springboot.board.domain.User;
 
+@Component
 public class HttpSessionUtils {
 
 	// session 의 key 값을 상수로 변경
